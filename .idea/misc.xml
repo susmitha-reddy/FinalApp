@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/hsusm/AndroidStudioProjects/SmartCart2/app/src/main/res/drawable/button_bg.xml" value="0.1035" />
+        <entry key="..\:/Users/hsusm/AndroidStudioProjects/SmartCart2/app/src/main/res/drawable/button_circle_bg.xml" value="0.253" />
+        <entry key="..\:/Users/hsusm/AndroidStudioProjects/SmartCart2/app/src/main/res/drawable/cart_bg.xml" value="0.1" />
+        <entry key="..\:/Users/hsusm/AndroidStudioProjects/SmartCart2/app/src/main/res/drawable/input_bg.xml" value="0.1155" />
+        <entry key="..\:/Users/hsusm/AndroidStudioProjects/SmartCart2/app/src/main/res/drawable/input_shape.xml" value="0.2035" />
+        <entry key="..\:/Users/hsusm/AndroidStudioProjects/SmartCart2/app/src/main/res/drawable/nav_bar_item.xml" value="0.1" />
+        <entry key="..\:/Users/hsusm/AndroidStudioProjects/SmartCart2/app/src/main/res/drawable/register_input_bg.xml" value="0.1" />
+        <entry key="..\:/Users/hsusm/AndroidStudioProjects/SmartCart2/app/src/main/res/drawable/search_bg.xml" value="0.1" />
+        <entry key="..\:/Users/hsusm/AndroidStudioProjects/SmartCart2/app/src/main/res/drawable/zipcode_button_bg.xml" value="0.1" />
+        <entry key="..\:/Users/hsusm/AndroidStudioProjects/SmartCart2/app/src/main/res/layout/activity_home.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/hsusm/AndroidStudioProjects/SmartCart2/app/src/main/res/layout/activity_location.xml" value="0.13425925925925927" />
+        <entry key="..\:/Users/hsusm/AndroidStudioProjects/SmartCart2/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/hsusm/AndroidStudioProjects/SmartCart2/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/hsusm/AndroidStudioProjects/SmartCart2/app/src/main/res/layout/activity_maps2.xml" value="0.1" />
+        <entry key="..\:/Users/hsusm/AndroidStudioProjects/SmartCart2/app/src/main/res/layout/activity_register.xml" value="0.1" />
+        <entry key="..\:/Users/hsusm/AndroidStudioProjects/SmartCart2/app/src/main/res/layout/activity_search.xml" value="0.1" />
+        <entry key="..\:/Users/hsusm/AndroidStudioProjects/SmartCart2/app/src/main/res/layout/activity_test.xml" value="0.2171875" />
+        <entry key="..\:/Users/hsusm/AndroidStudioProjects/SmartCart2/app/src/main/res/layout/cart_items.xml" value="0.10416666666666667" />
+        <entry key="..\:/Users/hsusm/AndroidStudioProjects/SmartCart2/app/src/main/res/layout/filter_dailog_layout.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/hsusm/AndroidStudioProjects/SmartCart2/app/src/main/res/layout/login_tab_fragment.xml" value="0.10416666666666667" />
+        <entry key="..\:/Users/hsusm/AndroidStudioProjects/SmartCart2/app/src/main/res/layout/register_input_bg.xml" value="0.1" />
+        <entry key="..\:/Users/hsusm/AndroidStudioProjects/SmartCart2/app/src/main/res/layout/sign_up_tab_fragment.xml" value="0.10416666666666667" />
+        <entry key="..\:/Users/hsusm/AndroidStudioProjects/SmartCart2/app/src/main/res/layout/store_results_dialog.xml" value="0.1" />
+        <entry key="..\:/Users/hsusm/AndroidStudioProjects/SmartCart2/app/src/main/res/menu/menu_navigation.xml" value="0.10989583333333333" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
