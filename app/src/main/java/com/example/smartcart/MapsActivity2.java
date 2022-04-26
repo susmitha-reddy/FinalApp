@@ -38,6 +38,8 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
     ArrayList<DisplayData> data = new ArrayList<DisplayData>();
     Map<Marker, DisplayData> markerMap = new HashMap<Marker, DisplayData>();
 
+    MaterialButton back, cart;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,16 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
         setUpMap();
         data = (ArrayList<DisplayData>) getIntent().getExtras().getSerializable("FinalData");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        back = findViewById(R.id.back_button);
+        cart = findViewById(R.id.cart_button);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MapsActivity2.this, SearchActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
     private void setUpMap() {

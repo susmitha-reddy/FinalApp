@@ -48,7 +48,7 @@ public class SearchActivity extends AppCompatActivity {
     ImageButton search_button;
     ConstraintLayout constraintLayout1, add_layout;
     TextView add_text;
-    MaterialButton add_button;
+    MaterialButton add_button, cart_button;
     Button done_button;
 
     int counter = 0;
@@ -79,8 +79,8 @@ public class SearchActivity extends AppCompatActivity {
 
                         return true;
                     case R.id.CartActivity:
-//                        startActivity(new Intent(getApplicationContext(),CartActivity.class));
-//                        overridePendingTransition(0,0);
+                        startActivity(new Intent(getApplicationContext(),CartActivity.class));
+                        overridePendingTransition(0,0);
                         return true;
                     case R.id.HomeActivity:
                         startActivity(new Intent(getApplicationContext(),HomeActivity.class));
@@ -105,6 +105,7 @@ public class SearchActivity extends AppCompatActivity {
         add_text = findViewById(R.id.add_text);
         add_button = findViewById(R.id.add_button);
         done_button = findViewById(R.id.done_button);
+        cart_button = findViewById(R.id.cart_button);
         constraintLayout1.setVisibility(View.GONE);
 
         if(PreferenceManager.getInstance(this).getArrayList("SelectedItems") != null){
@@ -185,6 +186,15 @@ public class SearchActivity extends AppCompatActivity {
                 }else{
                     getFinalProductStores(addedItems, prefStores);
                 }
+            }
+        });
+
+        cart_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PreferenceManager.getInstance(SearchActivity.this).saveArrayList(addedItems,"CartItems");
+                Intent i = new Intent(SearchActivity.this, CartActivity.class);
+                startActivity(i);
             }
         });
     }

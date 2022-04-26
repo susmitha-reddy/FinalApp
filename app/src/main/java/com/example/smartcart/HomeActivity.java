@@ -63,8 +63,8 @@ public class HomeActivity extends AppCompatActivity implements FilterDialog.Filt
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.CartActivity:
-//                        startActivity(new Intent(getApplicationContext(),CartActivity.class));
-//                        overridePendingTransition(0,0);
+                        startActivity(new Intent(getApplicationContext(),CartActivity.class));
+                        overridePendingTransition(0,0);
                         return true;
                     case R.id.HomeActivity:
                         return true;
