@@ -258,6 +258,7 @@ public class SearchActivity extends AppCompatActivity {
             Double total = 0.0;
             Store store = null;
             for(ProductStore k: products){
+                ArrayList<String> p = new ArrayList<>();
                 total = total+k.getPrice();
                 for (Store s : stores){
                     if(entry.getKey().equals(s.getZipCode())){

@@ -11,6 +11,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -20,7 +22,7 @@ public class ResultDialog extends AppCompatDialogFragment {
     static View view;
 
     DisplayData data;
-
+    ArrayList<String> products = new ArrayList<String>();
 
     public ResultDialog(DisplayData data){
         this.data = data;
@@ -31,16 +33,24 @@ public class ResultDialog extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         view = inflater.inflate(R.layout.store_results_dialog, null);
-        product_text = view.findViewById(R.id.product_number_text);
-        product_number = view.findViewById(R.id.product_number);
+        product_text = view.findViewById(R.id.no_of_products_text);
+        product_number = view.findViewById(R.id.products_available_value);
         distance_text = view.findViewById(R.id.distance_text);
-        distance = view.findViewById(R.id.distance);
+        distance = view.findViewById(R.id.distance_value);
 
         product_number.setText(String.valueOf(data.getProductsList().size()));
-        distance.setText(String.valueOf(data.getStore().getDistance()));
+        distance.setText(String.valueOf(data.getStore().getDistance()/1000) +"Km");
 
+        for(ProductStore p : data.getProductsList()){
+            products.add(p.getProduct());
+        }
+
+        RecyclerView recyclerView = view.findViewById(R.id.store_items);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        StoreItemsDisplayAdapter storeItemsDisplayAdapter = new StoreItemsDisplayAdapter(products, getActivity());
+        recyclerView.setAdapter(storeItemsDisplayAdapter);
         builder.setView(view)
-                .setPositiveButton("Apply", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Save Store", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 

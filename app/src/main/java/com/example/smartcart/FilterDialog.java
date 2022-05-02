@@ -47,7 +47,7 @@ public class FilterDialog extends AppCompatDialogFragment implements  LocationSe
         view = inflater.inflate(R.layout.filter_dailog_layout,null);
 
         builder.setView(view)
-                .setPositiveButton("Apply", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if(stores!=null){
