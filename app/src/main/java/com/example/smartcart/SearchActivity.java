@@ -87,8 +87,8 @@ public class SearchActivity extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.ProfileActivity:
-//                        startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
-//                        overridePendingTransition(0,0);
+                        startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+                        overridePendingTransition(0,0);
                         return true;
 
                 }
@@ -181,6 +181,7 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d("INFO","Omclick worked");
                 PreferenceManager.getInstance(SearchActivity.this).saveArrayList(addedItems,"ShoppingCart");
+                PreferenceManager.getInstance(SearchActivity.this).saveArrayList(addedItems,"CartItems");
                 if(prefStores == null){
                     Toast.makeText(SearchActivity.this,"Please set the search radius before proceeding",Toast.LENGTH_LONG);
                 }else{

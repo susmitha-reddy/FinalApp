@@ -14,7 +14,7 @@ import com.example.smartcart.util.PreferenceManager;
 
 import java.util.ArrayList;
 
-public class AddItemsDisplayAdapter extends RecyclerView.Adapter<AddItemsViewHolder> {
+public class  AddItemsDisplayAdapter extends RecyclerView.Adapter<AddItemsViewHolder> {
     ArrayList<String> items;
     Activity activity;
 

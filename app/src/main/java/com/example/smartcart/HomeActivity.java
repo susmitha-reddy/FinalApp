@@ -59,9 +59,15 @@ public class HomeActivity extends AppCompatActivity implements FilterDialog.Filt
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.SearchActivity:
-                        startActivity(new Intent(getApplicationContext(),SearchActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
+                        if(PreferenceManager.getInstance(HomeActivity.this).getStoresList("NearbyStores")!=null){
+                            startActivity(new Intent(getApplicationContext(),SearchActivity.class));
+                            overridePendingTransition(0,0);
+                            return true;
+                        }
+                        else{
+                            FilterDialog filterDialog = new FilterDialog();
+                            filterDialog.show(getSupportFragmentManager(),"filter dialog");
+                        }
                     case R.id.CartActivity:
                         startActivity(new Intent(getApplicationContext(),CartActivity.class));
                         overridePendingTransition(0,0);
@@ -69,15 +75,17 @@ public class HomeActivity extends AppCompatActivity implements FilterDialog.Filt
                     case R.id.HomeActivity:
                         return true;
                     case R.id.ProfileActivity:
-//                        startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
-//                        overridePendingTransition(0,0);
+                        startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+                        overridePendingTransition(0,0);
                         return true;
 
                 }
                 return false;
             }
         });
-
+        if(PreferenceManager.getInstance(HomeActivity.this).fetchString("Radius")==null){
+            PreferenceManager.getInstance(HomeActivity.this).saveString("Radius","5");
+        }
         filter = findViewById(R.id.filter_button);
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +132,7 @@ public class HomeActivity extends AppCompatActivity implements FilterDialog.Filt
     public void applyTexts(ArrayList<Store> stores) {
         nstores = stores;
         Log.d("Stores info",String.valueOf(nstores.size()));
+        PreferenceManager.getInstance(HomeActivity.this).saveStoresList("NearbyStores",nstores);
 
     }
 }

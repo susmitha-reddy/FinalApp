@@ -41,8 +41,8 @@ public class CartActivity extends AppCompatActivity {
                     case R.id.CartActivity:
                         return true;
                     case R.id.ProfileActivity:
-//                        startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
-//                        overridePendingTransition(0,0);
+                        startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+                        overridePendingTransition(0,0);
                         return true;
 
                 }
@@ -53,8 +53,8 @@ public class CartActivity extends AppCompatActivity {
             products = PreferenceManager.getInstance(CartActivity.this).getArrayList("CartItems");
             RecyclerView recyclerView = findViewById(R.id.cart_items);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            AddItemsDisplayAdapter addItemsDisplayAdapter = new AddItemsDisplayAdapter(products, this);
-            recyclerView.setAdapter(addItemsDisplayAdapter);
+            CartItemsDisplayAdapter cartItemsDisplayAdapter = new CartItemsDisplayAdapter(products, this);
+            recyclerView.setAdapter(cartItemsDisplayAdapter);
         }
 
     }
