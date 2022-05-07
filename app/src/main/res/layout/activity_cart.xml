@@ -44,7 +44,7 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="18dp"
-        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintVertical_bias="0.1"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -53,19 +53,22 @@
         tools:layout_editor_absoluteX="32dp"
         tools:layout_editor_absoluteY="52dp" />
 
-    <ImageView
-        android:id="@+id/cart_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/cartblack"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/selected_store"
+        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:backgroundTint="@color/primary_blue"
+        android:padding="5dp"
+        app:cornerRadius="20dp"
+        app:icon="@drawable/shop"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
         app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintTop_toTopOf="@id/shopping_cart"
-        app:layout_constraintBottom_toBottomOf="@id/shopping_cart"
-        app:layout_constraintStart_toEndOf="@id/shopping_cart"
+        app:layout_constraintBottom_toBottomOf="@+id/shopping_cart"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteX="275dp"
-        tools:layout_editor_absoluteY="8dp" />
-
+        app:layout_constraintStart_toEndOf="@+id/shopping_cart"
+        app:layout_constraintTop_toTopOf="@+id/shopping_cart" />
     <TextView
         android:id="@+id/empty_cart_text"
         android:layout_width="wrap_content"
@@ -95,4 +98,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/empty_cart_text" />
+
+    <Button
+        android:id="@+id/save_cart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        app:layout_constraintBottom_toTopOf="@+id/nav_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cart_items" />
 </androidx.constraintlayout.widget.ConstraintLayout>

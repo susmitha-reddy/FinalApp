@@ -6,28 +6,12 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".MapsActivity2">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/back_button"
-        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="10dp"
-        android:backgroundTint="@color/primary_blue"
-        android:padding="5dp"
-        app:cornerRadius="20dp"
-        app:icon="@drawable/back"
-        app:iconGravity="textStart"
-        app:iconPadding="0dp"
-        app:layout_constraintBottom_toTopOf="@id/map"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nearby Stores:"
-        app:layout_constraintHorizontal_bias="0.3"
+        android:text="Search Results"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintBottom_toTopOf="@+id/map"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,21 +31,20 @@ tools:context=".MapsActivity2">
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/cart_button"
-        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="30dp"
-        android:backgroundTint="@color/primary_blue"
-        android:padding="5dp"
-        app:cornerRadius="20dp"
-        app:icon="@drawable/add_to_cart"
-        app:iconGravity="textStart"
-        app:iconPadding="0dp"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:itemBackground="@color/white"
+        app:itemIconTint="@drawable/nav_bar_item"
+        app:itemTextColor="@drawable/nav_bar_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/map"  />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1"
+        app:menu="@menu/menu_navigation">
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 </androidx.constraintlayout.widget.ConstraintLayout>

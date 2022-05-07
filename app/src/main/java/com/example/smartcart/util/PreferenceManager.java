@@ -3,6 +3,8 @@ package com.example.smartcart.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.smartcart.DisplayData;
+import com.example.smartcart.ProductPrice;
 import com.example.smartcart.Store;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -81,6 +83,33 @@ public class PreferenceManager {
         Gson gson = new Gson();
         ArrayList<Store> stores = gson.fromJson(sharedPreferences.getString(key,null), new TypeToken<ArrayList<Store>>() {}.getType());
         return stores;
+    }
+
+    public void saveStoreItemsList(String key, ArrayList<ProductPrice> stores){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String stringValue = gson.toJson(stores);
+        editor.putString(key,stringValue);
+        editor.apply();
+    }
+
+    public ArrayList<ProductPrice> getStoreItemsList(String key){
+        Gson gson = new Gson();
+        ArrayList<ProductPrice> productPrices = gson.fromJson(sharedPreferences.getString(key,null), new TypeToken<ArrayList<Store>>() {}.getType());
+        return productPrices;
+    }
+
+    public void saveDisplayData(String key, DisplayData data){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String stringValue = gson.toJson(data);
+        editor.putString(key, stringValue);
+        editor.apply();
+    }
+    public DisplayData getDisplayData(String key){
+        Gson gson = new Gson();
+        DisplayData data = gson.fromJson(sharedPreferences.getString(key,null), new TypeToken<DisplayData>() {}.getType());
+        return data;
     }
 
     public void deletepreference(String key){

@@ -36,16 +36,12 @@ public class Store implements Serializable {
         return name;
     }
 
-    public void setLocation(String address) {
-        this.address = address;
-    }
-
-    public String getLocation() {
-        return address;
-    }
-
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     public void setDistance(Double distance) {

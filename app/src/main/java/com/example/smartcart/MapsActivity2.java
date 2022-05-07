@@ -9,8 +9,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 
+import com.example.smartcart.util.PreferenceManager;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -19,7 +22,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.example.smartcart.databinding.ActivityMaps2Binding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.maps.android.ui.IconGenerator;
 
@@ -31,6 +34,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
 
     private GoogleMap mMap;
     private boolean mIsRestore;
+    BottomNavigationView bottomNavigationView;
 
     protected int getLayoutId() {
         return R.layout.activity_maps2;
@@ -49,17 +53,38 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
         setUpMap();
         data = (ArrayList<DisplayData>) getIntent().getExtras().getSerializable("FinalData");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        back = findViewById(R.id.back_button);
-        cart = findViewById(R.id.cart_button);
-
-        back.setOnClickListener(new View.OnClickListener() {
+        bottomNavigationView = findViewById(R.id.nav_bar);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MapsActivity2.this, SearchActivity.class);
-                startActivity(i);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.SearchActivity:
+                        if(PreferenceManager.getInstance(MapsActivity2.this).getStoresList("NearbyStores")!=null){
+                            startActivity(new Intent(getApplicationContext(),SearchActivity.class));
+                            overridePendingTransition(0,0);
+                            return true;
+                        }
+                        else{
+                            FilterDialog filterDialog = new FilterDialog();
+                            filterDialog.show(getSupportFragmentManager(),"filter dialog");
+                        }
+                    case R.id.CartActivity:
+                        startActivity(new Intent(getApplicationContext(),CartActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.HomeActivity:
+                        startActivity((new Intent(getApplicationContext(),HomeActivity.class)));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.ProfileActivity:
+                        startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                }
+                return false;
             }
         });
-
     }
     private void setUpMap() {
         ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMapAsync(this);

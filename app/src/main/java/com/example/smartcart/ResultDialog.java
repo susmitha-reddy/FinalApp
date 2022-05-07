@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.smartcart.util.PreferenceManager;
+
 import java.util.ArrayList;
 
 public class ResultDialog extends AppCompatDialogFragment {
@@ -23,7 +25,7 @@ public class ResultDialog extends AppCompatDialogFragment {
 
     DisplayData data;
     ArrayList<String> products = new ArrayList<String>();
-
+    ArrayList<ProductPrice> productPrices = new ArrayList<ProductPrice>();
     public ResultDialog(DisplayData data){
         this.data = data;
     }
@@ -39,21 +41,23 @@ public class ResultDialog extends AppCompatDialogFragment {
         distance = view.findViewById(R.id.distance_value);
 
         product_number.setText(String.valueOf(data.getProductsList().size()));
-        distance.setText(String.valueOf(data.getStore().getDistance()/1000) +"Km");
+        distance.setText(String.valueOf(data.getStore().getDistance()/1000) +" Km");
 
         for(ProductStore p : data.getProductsList()){
             products.add(p.getProduct());
+            ProductPrice pp = new ProductPrice(p.getProduct(),String.valueOf(p.getPrice()));
+            productPrices.add(pp);
         }
 
         RecyclerView recyclerView = view.findViewById(R.id.store_items);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        StoreItemsDisplayAdapter storeItemsDisplayAdapter = new StoreItemsDisplayAdapter(products, getActivity());
+        StoreItemsDisplayAdapter storeItemsDisplayAdapter = new StoreItemsDisplayAdapter(productPrices, getActivity());
         recyclerView.setAdapter(storeItemsDisplayAdapter);
         builder.setView(view)
                 .setPositiveButton("Save Store", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
+                        PreferenceManager.getInstance(getActivity()).saveDisplayData("StoreInfo", data);
                     }
                 });
         return builder.create();

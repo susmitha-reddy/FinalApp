@@ -9,24 +9,45 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.smartcart.util.PreferenceManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 
+import org.bson.Document;
+
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+
+import io.realm.mongodb.App;
+import io.realm.mongodb.AppConfiguration;
+import io.realm.mongodb.RealmResultTask;
+import io.realm.mongodb.User;
+import io.realm.mongodb.mongo.MongoClient;
+import io.realm.mongodb.mongo.MongoCollection;
+import io.realm.mongodb.mongo.MongoDatabase;
+import io.realm.mongodb.mongo.iterable.MongoCursor;
 
 public class CartActivity extends AppCompatActivity {
 
     ArrayList<String> products =  new ArrayList<String>();
     TextView enpty_text;
-    MaterialButton go_to_search;
+    MaterialButton go_to_search, selected_store;
+    Button save_button;
+    String appId = "smartcartdb-unnio";
+    private App app;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-
+        app = new App(new AppConfiguration.Builder(appId).build());
+        User user = app.currentUser();
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_bar);
         bottomNavigationView.setSelectedItemId(R.id.CartActivity);
 
@@ -68,6 +89,38 @@ public class CartActivity extends AppCompatActivity {
             enpty_text.setVisibility(View.VISIBLE);
             go_to_search.setVisibility(View.VISIBLE);
         }
+        save_button = findViewById(R.id.save_cart);
+        save_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                save_button.setEnabled(false);
+                SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+                Date todayDate = new Date();
+                String thisDate = currentDate.format(todayDate);
+                MongoClient mongoClient = user.getMongoClient("mongodb-atlas");
+                MongoDatabase mongoDatabase = mongoClient.getDatabase("SmartCartDb");
+                MongoCollection savedCollection = mongoDatabase.getCollection("savedLists");
+
+                savedCollection.insertOne(new Document("userid", user.getId()).append("products",products).
+                        append("date",thisDate)).getAsync(result -> {
+                            if(result.isSuccess()){
+                                save_button.setEnabled(true);
+                                Toast.makeText(CartActivity.this, "Cart Items are saved.", Toast.LENGTH_SHORT).show();
+                            }
+                });
+
+
+
+            }
+        });
+        selected_store = findViewById(R.id.selected_store);
+        selected_store.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CartActivity.this,StoreActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }

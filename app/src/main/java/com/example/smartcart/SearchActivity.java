@@ -263,7 +263,7 @@ public class SearchActivity extends AppCompatActivity {
                 for (Store s : stores){
                     if(entry.getKey().equals(s.getZipCode())){
                         Log.d("Zipcode",s.getZipCode());
-                        store = new Store(s.getName(),s.getZipCode(),s.getDistance(),s.getLocation(),s.getLat(),s.getLng());
+                        store = new Store(s.getName(),s.getZipCode(),s.getDistance(),s.getAddress(),s.getLat(),s.getLng());
                     }
                 }
             }
