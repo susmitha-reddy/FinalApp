@@ -8,8 +8,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
@@ -34,10 +38,12 @@ public class FilterDialog extends AppCompatDialogFragment implements  LocationSe
     TextView  storestext, selectedvalue;
     SeekBar seekbar;
     Button find_stores,apply;
+    AutoCompleteTextView dropdown;
     static View view;
     static ArrayList<Store> stores = new ArrayList<Store>();
     private FilterDialogListener listener;
     String appId = "smartcartdb-unnio";
+    String selectedStore;
     private App app;
 
     @Override
@@ -64,6 +70,26 @@ public class FilterDialog extends AppCompatDialogFragment implements  LocationSe
         selectedvalue = view.findViewById(R.id.selectedValue);
         seekbar = view.findViewById(R.id.seekBar);
         find_stores = view.findViewById(R.id.find_stores);
+        dropdown = view.findViewById(R.id.store_dropdown);
+        ArrayList<String> retailStores = new ArrayList<String>();
+        retailStores.add("All");
+        retailStores.add("Metro");
+        retailStores.add("Real Canadian Store");
+        retailStores.add("Sobeys");
+        retailStores.add("Loblaws");
+        retailStores.add("Walmart");
+        retailStores.add("Food Basics");
+        retailStores.add("Freshco");
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.store_list, retailStores);
+        dropdown.setAdapter(adapter);
+        dropdown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedStore = adapterView.getItemAtPosition(i).toString();
+
+            }
+        });
+
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
@@ -89,7 +115,12 @@ public class FilterDialog extends AppCompatDialogFragment implements  LocationSe
                 LocationService locationService = new LocationService();
                 locationService.delegate = FilterDialog.this;
                 PreferenceManager.getInstance(getActivity()).saveString("Radius",String.valueOf(selectedvalue.getText()));
-                locationService.execute(new String[]{String.valueOf(selectedvalue.getText()), lat, lng});
+                if(selectedStore!= null){
+                    locationService.execute(new String[]{String.valueOf(selectedvalue.getText()), lat, lng,selectedStore});
+                }
+                else{
+                    locationService.execute(new String[]{String.valueOf(selectedvalue.getText()), lat, lng});
+                }
                 find_stores.setEnabled(false);
             }
         });
@@ -105,7 +136,16 @@ public class FilterDialog extends AppCompatDialogFragment implements  LocationSe
     public void processFinish(ArrayList<Store> output) {
         Log.d("Progress","Done with location service, next to Realm Service");
         Log.d("URL Info",String.valueOf(output.size()));
-        getinHouseStores(output);
+        if(output.size()!=0){
+            getinHouseStores(output);
+        }
+        else{
+            find_stores = view.findViewById(R.id.find_stores);
+            storestext = view.findViewById(R.id.stores_found);
+            find_stores.setEnabled(true);
+            storestext.setText("Found 0 nearby "+ selectedStore +" stores.");
+
+        }
     }
 
 
@@ -135,8 +175,6 @@ public class FilterDialog extends AppCompatDialogFragment implements  LocationSe
                 while (results.hasNext()) {
                     Document current = results.next();
                     for(Store s : in){
-                        Log.d("Current Zipcode",current.getString("ZipCodes"));
-                        Log.d("Zipcode of Stores",s.getZipCode());
                         if(current.getString("ZipCodes").equals(s.getZipCode())){
                             inHousestores.add(s);
                         }
@@ -151,6 +189,7 @@ public class FilterDialog extends AppCompatDialogFragment implements  LocationSe
                // apply.setEnabled(true);
             }
         });
+
 
     }
 

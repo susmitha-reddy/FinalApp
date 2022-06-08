@@ -63,13 +63,13 @@
                 android:textSize="20dp"
                 android:textColor="#0C2EEC"
                 app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintVertical_bias="0.2"
+                app:layout_constraintVertical_bias="0.1"
                 android:layout_marginStart="20dp"
                 app:layout_constraintEnd_toEndOf="@+id/seekBar"
                 app:layout_constraintStart_toStartOf="@+id/seekBar"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/seekBar"
-                tools:layout_editor_absoluteY="93dp" />
+                />
 
             <TextView
                 android:id="@+id/maxValue"
@@ -80,13 +80,13 @@
                 android:textSize="20dp"
                 android:textColor="#0C2EEC"
                 app:layout_constraintHorizontal_bias="1"
-                app:layout_constraintVertical_bias="0.2"
+                app:layout_constraintVertical_bias="0.1"
                 android:layout_marginEnd="20dp"
                 app:layout_constraintEnd_toEndOf="@+id/seekBar"
                 app:layout_constraintStart_toStartOf="@+id/seekBar"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/seekBar"
-                tools:layout_editor_absoluteY="93dp" />
+                 />
 
 
             <TextView
@@ -97,7 +97,7 @@
                 android:textStyle="bold"
                 android:textSize="20dp"
                 android:textColor="#0C2EEC"
-                app:layout_constraintVertical_bias="0.2"
+                app:layout_constraintVertical_bias="0.1"
                 android:layout_marginEnd="20dp"
                 app:layout_constraintStart_toEndOf="@id/minValue"
                 app:layout_constraintEnd_toStartOf="@id/maxValue"
@@ -112,7 +112,7 @@
                 android:text="Find Stores"
                 android:layout_marginTop="10dp"
                 app:layout_constraintVertical_bias="0"
-                app:layout_constraintTop_toBottomOf="@id/selectedValue"
+                app:layout_constraintTop_toBottomOf="@id/store_list"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
@@ -123,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:text="Found 5 stores nearby."
+                android:text=""
                 android:textSize="16dp"
                 android:textStyle="italic|bold"
                 app:layout_constraintTop_toBottomOf="@id/find_stores"
@@ -131,9 +131,33 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/store_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Select a Store"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginBottom="20dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                app:layout_constraintTop_toBottomOf="@id/selectedValue"
+                app:layout_constraintBottom_toTopOf="@id/stores_found"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <AutoCompleteTextView
+                    android:id="@+id/store_dropdown"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

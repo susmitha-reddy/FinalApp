@@ -29,10 +29,14 @@ public class LocationService extends AsyncTask<String, Void, String> {
         String radius = urls[0];
         String lat = urls[1];
         String lng = urls[2];
+        String store="";
+        if(urls.length == 4 && urls[3]!="All"){
+             store = urls[3];
+        }
         String result= "";
         HttpURLConnection urlConnection = null;
         try {
-            URL url = buildurl(radius,lat,lng);
+            URL url = buildurl(radius,lat,lng,store);
             urlConnection = (HttpURLConnection) url.openConnection();
             InputStream in = urlConnection.getInputStream();
             InputStreamReader isw = new InputStreamReader(in);
@@ -77,11 +81,12 @@ public class LocationService extends AsyncTask<String, Void, String> {
         delegate.processFinish(list);
     }
 
-    public URL buildurl(String radius, String lat, String lng) throws MalformedURLException {
+    public URL buildurl(String radius, String lat, String lng, String store) throws MalformedURLException {
         URL url = new URL("https://api.foursquare.com/v2/venues/search?client_id=SR4VUPWVMDSST2FBC3N0WLRCHXBF4KMTCOIRLFB1LPLMWT0T&client_secret=S0LQW3NRAEPZ4RO0YHS2JZ0WNJGJKS0KBIANTYYXT02QTQDB&" +
                 "v=20180323&ll=" + lat +"," + lng+"&"+
                 "radius="+ radius +"000&"+
-                "categoryId=52f2ab2ebcbc57f1066b8b46");
+                "categoryId=52f2ab2ebcbc57f1066b8b46&" +
+                "query="+ store);
         Log.d("URL",String.valueOf(url));
 
         return url;
