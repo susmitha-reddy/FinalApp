@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartCart">
         <activity
+            android:name=".CategoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".StoreActivity"
             android:exported="false" />
         <activity
@@ -51,9 +54,8 @@
             android:exported="false" />
         <activity
             android:name=".SearchActivity"
-            android:windowSoftInputMode="adjustPan"
-
-        android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".HomeActivity"
             android:exported="false" />
@@ -75,6 +77,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".HelperActivity"
+            android:exported="false" />
+
+        <service
+            android:name=".PushNotificationService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
         <meta-data
             android:name="preloaded_fonts"

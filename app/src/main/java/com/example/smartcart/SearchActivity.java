@@ -53,7 +53,6 @@ public class SearchActivity extends AppCompatActivity {
 
     int counter = 0;
     ArrayList<String> inventoryProducts = new ArrayList<String>();
-    ArrayList<String> selectedItems = new ArrayList<String>();
     ArrayList<String> addedItems = new ArrayList<String>();
 
     ArrayList<Store> prefStores = new ArrayList<Store>();
@@ -90,6 +89,10 @@ public class SearchActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
                         overridePendingTransition(0,0);
                         return true;
+                    case R.id.StoreActivity:
+                        startActivity(new Intent(getApplicationContext(), StoreActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
 
                 }
                 return false;
@@ -120,7 +123,7 @@ public class SearchActivity extends AppCompatActivity {
 
         MongoClient mongoClient = user.getMongoClient("mongodb-atlas");
         MongoDatabase mongoDatabase = mongoClient.getDatabase("SmartCartDb");
-        MongoCollection productCollection = mongoDatabase.getCollection("ProductCollection");
+        MongoCollection productCollection = mongoDatabase.getCollection("ProductCategory");
 
         RealmResultTask<MongoCursor<Document>> findTask = productCollection.find().iterator();
         findTask.getAsync(task -> {
@@ -128,10 +131,11 @@ public class SearchActivity extends AppCompatActivity {
                 Log.v("Product", "Started");
                 MongoCursor<Document> results = task.get();
                 while (results.hasNext()) {
-                    String product = results.next().getString("Name");
+                    String product = results.next().getString("product_name");
                     inventoryProducts.add(product);
                 }
                 Log.d("SIZE", String.valueOf(inventoryProducts.size()));
+                Log.d("New Products", inventoryProducts.get(0));
                 progressBar.setVisibility(View.GONE);
                 constraintLayout1.setVisibility(View.VISIBLE);
                 add_layout.setVisibility(View.GONE);
@@ -212,24 +216,24 @@ public class SearchActivity extends AppCompatActivity {
         User user = app.currentUser();
         MongoClient mongoClient = user.getMongoClient("mongodb-atlas");
         MongoDatabase mongoDatabase = mongoClient.getDatabase("SmartCartDb");
-        MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("ProductStoreCollection");
+        MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("ProductandStoreCollection");
         Document filter = getQuery(listItems,Stores);
         RealmResultTask<MongoCursor<Document>> findTask = mongoCollection.find(filter).iterator();
         Log.d("INFO","Back to getfinalproducts");
         findTask.getAsync(task ->{
             if(task.isSuccess()){
+                
                 Log.v("Method","Started");
                 MongoCursor<Document> results = task.get();
                 Log.v("Results","got results");
                 while(results.hasNext()){
                     Document current = results.next();
                     ProductStore ps = new ProductStore(current.getString("Name"),Double.valueOf(current.getString("Price")),
-                            current.getString("Sale"),current.getString("Store"),current.getString("Zipcode"));
+                            current.getString("Store"),current.getString("Zipcode"));
                     listf.add(ps);
                 }
                 Log.d("Products","Price details found");
                 displayData(listf,Stores);
-
             }
             else{
                 Log.d("MongoDb ERROR",task.getError().toString());
@@ -274,9 +278,14 @@ public class SearchActivity extends AppCompatActivity {
         for (DisplayData d : finalData){
             Log.d("Details",d.getStore().getName() + " " + String.valueOf(d.getPrice()) + String.valueOf(d.getProductsList().size()));
         }
-        Intent i = new Intent(SearchActivity.this,MapsActivity2.class);
-        i.putExtra("FinalData",finalData);
-        startActivity(i);
+        if(finalData.size() > 0){
+            Intent i = new Intent(SearchActivity.this,MapsActivity2.class);
+            i.putExtra("FinalData",finalData);
+            startActivity(i);
+        } else {
+            Toast.makeText(SearchActivity.this,"Selected Products are not available in the store", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     public Document getQuery(@NonNull ArrayList<String> products, ArrayList<Store> stores){

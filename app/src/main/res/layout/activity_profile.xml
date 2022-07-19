@@ -151,7 +151,6 @@
         android:id="@+id/nav_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         app:itemBackground="@color/white"
         app:itemIconTint="@drawable/nav_bar_item"
         app:itemTextColor="@drawable/nav_bar_item"

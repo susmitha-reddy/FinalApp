@@ -69,6 +69,10 @@ public class CartActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
                         overridePendingTransition(0,0);
                         return true;
+                    case R.id.StoreActivity:
+                        startActivity(new Intent(getApplicationContext(), StoreActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
 
                 }
                 return false;

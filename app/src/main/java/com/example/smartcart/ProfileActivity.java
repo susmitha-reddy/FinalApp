@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -51,6 +52,10 @@ public class ProfileActivity extends AppCompatActivity {
                         return true;
                     case R.id.ProfileActivity:
                         return true;
+                    case R.id.StoreActivity:
+                        startActivity(new Intent(getApplicationContext(), StoreActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
 
                 }
                 return false;
@@ -75,6 +80,22 @@ public class ProfileActivity extends AppCompatActivity {
         phone_value.setText(String.valueOf(user.getCustomData().getString("phoneNumber")));
         location_value.setText(PreferenceManager.getInstance(ProfileActivity.this).fetchString("Location"));
         radius_value.setText(String.valueOf(PreferenceManager.getInstance(ProfileActivity.this).fetchString("Radius")));
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PreferenceManager.getInstance(ProfileActivity.this).deleteAllPreferences();
+                PreferenceManager.getInstance(ProfileActivity.this).deletepreference("FirstRun");
+                Log.d("INFO",String.valueOf(PreferenceManager.getInstance(ProfileActivity.this).fetchBoolean("FirstRun")));
+                if(PreferenceManager.getInstance(ProfileActivity.this).fetchBoolean("FirstRun")){
+                    PreferenceManager.getInstance(ProfileActivity.this).deletepreference("FirstRun");
+                    Log.d("INFO",String.valueOf(PreferenceManager.getInstance(ProfileActivity.this).fetchBoolean("FirstRun")));
+                    Log.d("User Logout","User is successfully logged out");
+                }
+                Intent intent = new Intent(ProfileActivity.this,LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 

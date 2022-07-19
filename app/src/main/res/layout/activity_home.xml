@@ -137,19 +137,43 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/category_text"
+        android:text="Categories"
+        android:textStyle="bold"
+        android:textSize="22dp"
+        android:textColor="@color/black"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_margin="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/search_view"
+        app:layout_constraintStart_toStartOf="@id/search_view"
+        app:layout_constraintEnd_toEndOf="@id/search_view"
+        app:layout_constraintBottom_toTopOf="@id/categories_view"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/categories_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="40dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintTop_toBottomOf="@id/search_view"
+        app:layout_constraintBottom_toTopOf="@id/nav_bar"
+        app:layout_constraintStart_toStartOf="@id/search_view"
+        app:layout_constraintEnd_toEndOf="@id/search_view"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        app:itemBackground="@color/white"
+         app:itemBackground="@color/white"
         app:itemIconTint="@drawable/nav_bar_item"
         app:itemTextColor="@drawable/nav_bar_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_view"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1"
         app:menu="@menu/menu_navigation">
 

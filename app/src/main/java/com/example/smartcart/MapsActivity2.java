@@ -42,7 +42,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
     ArrayList<DisplayData> data = new ArrayList<DisplayData>();
     Map<Marker, DisplayData> markerMap = new HashMap<Marker, DisplayData>();
 
-    MaterialButton back, cart;
+    MaterialButton back;
 
 
     @Override
@@ -54,6 +54,8 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
         data = (ArrayList<DisplayData>) getIntent().getExtras().getSerializable("FinalData");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         bottomNavigationView = findViewById(R.id.nav_bar);
+        bottomNavigationView.setSelectedItemId(R.id.SearchActivity);
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -80,9 +82,21 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
                         startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
                         overridePendingTransition(0,0);
                         return true;
+                    case R.id.StoreActivity:
+                        startActivity(new Intent(getApplicationContext(), StoreActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
 
                 }
                 return false;
+            }
+        });
+
+        back = findViewById(R.id.back_btn);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MapsActivity2.this, SearchActivity.class));
             }
         });
     }

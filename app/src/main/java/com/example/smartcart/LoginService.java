@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.smartcart.util.PreferenceManager;
+
 import org.bson.Document;
 
 import io.realm.mongodb.App;

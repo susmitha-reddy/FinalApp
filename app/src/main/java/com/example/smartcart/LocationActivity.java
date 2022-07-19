@@ -70,7 +70,6 @@ public class LocationActivity extends AppCompatActivity implements LocationListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
         Toast.makeText(this, "User Logged in successfully", Toast.LENGTH_SHORT).show();
-
         find_location = findViewById(R.id.find_location);
         button_continue = findViewById(R.id.continue_button);
         address = findViewById(R.id.address_text);

@@ -5,6 +5,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
+import com.example.smartcart.util.PreferenceManager;
 import com.google.android.material.tabs.TabLayout;
 
 public class LoginActivity extends AppCompatActivity {

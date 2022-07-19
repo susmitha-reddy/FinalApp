@@ -3,6 +3,7 @@ package com.example.smartcart;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +26,7 @@ public class ResultDialog extends AppCompatDialogFragment {
 
     DisplayData data;
     ArrayList<String> products = new ArrayList<String>();
+    ArrayList<String> unavailableProducts = new ArrayList<String>();
     ArrayList<ProductPrice> productPrices = new ArrayList<ProductPrice>();
     public ResultDialog(DisplayData data){
         this.data = data;
@@ -58,6 +60,19 @@ public class ResultDialog extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         PreferenceManager.getInstance(getActivity()).saveDisplayData("StoreInfo", data);
+                        ArrayList<String> cartItems = PreferenceManager.getInstance(getActivity()).getArrayList("CartItems");
+                        for(String item : cartItems){
+                            if(products.contains(item)){
+                                continue;
+                            }
+                            else{
+                                unavailableProducts.add(item);
+                            }
+                        }
+                        Log.d("unavailable length", String.valueOf(unavailableProducts.size()));
+                        PreferenceManager.getInstance(getActivity()).saveArrayList( unavailableProducts, "UnavailableItems");
+                        Intent intent = new Intent(getActivity(),StoreActivity.class);
+                        startActivity(intent);
                     }
                 });
         return builder.create();

@@ -41,6 +41,13 @@ public class PreferenceManager {
         return sharedPreferences.getString(key, null);
     }
 
+    public  boolean saveBoolean(String key, Boolean value){
+        return sharedPreferences.edit().putBoolean(key,value).commit();
+    }
+
+    public boolean fetchBoolean(String key){
+        return sharedPreferences.getBoolean(key, false);
+    }
 
 
     public boolean saveObjects( String key, Object value){
@@ -119,6 +126,15 @@ public class PreferenceManager {
                 editor.remove(k);
             }
         }
+        editor.commit();
+    }
+
+    public void deleteAllPreferences(){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        for(String k : sharedPreferences.getAll().keySet()){
+            editor.remove(k);
+        }
+        editor.apply();
         editor.commit();
     }
 
