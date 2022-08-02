@@ -45,19 +45,23 @@
             app:layout_constraintVertical_bias="0.05"
             app:layout_constraintWidth_percent=".7" />
 
-        <ImageButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/search_button"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/button_circle_bg"
-            android:scaleType="fitCenter"
-            android:src="@drawable/search"
-            app:layout_constraintBottom_toBottomOf="@+id/autoComplete"
+            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="30dp"
+            android:backgroundTint="@color/primary_blue"
+            android:padding="5dp"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/search"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/autoComplete"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent=".05"
-            app:layout_constraintStart_toEndOf="@+id/autoComplete"
-            app:layout_constraintTop_toTopOf="@+id/autoComplete"
-            app:layout_constraintWidth_percent=".1" />
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintStart_toEndOf="@id/autoComplete"
+            app:layout_constraintTop_toTopOf="@id/autoComplete" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/add_layout"
@@ -145,15 +149,23 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
-            <Button
+
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/done_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Done"
-                app:layout_constraintTop_toBottomOf="@id/cart_items"
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/primary_blue"
+                android:padding="5dp"
+                app:cornerRadius="20dp"
+                app:icon="@drawable/done"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@id/cart_items"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/cart_button"

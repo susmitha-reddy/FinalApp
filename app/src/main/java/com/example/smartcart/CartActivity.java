@@ -38,8 +38,8 @@ public class CartActivity extends AppCompatActivity {
 
     ArrayList<String> products =  new ArrayList<String>();
     TextView enpty_text;
-    MaterialButton go_to_search, selected_store;
-    Button save_button;
+    MaterialButton go_to_search;
+    MaterialButton save_button;
     String appId = "smartcartdb-unnio";
     private App app;
     @Override
@@ -56,6 +56,10 @@ public class CartActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.SearchActivity:
+                        if(PreferenceManager.getInstance(CartActivity.this).getStoresList("NearbyStores")==null){
+                            FilterDialog filterDialog = new FilterDialog();
+                            filterDialog.show(getSupportFragmentManager(),"filter dialog");
+                        }
                         startActivity(new Intent(getApplicationContext(),SearchActivity.class));
                         overridePendingTransition(0,0);
                         return true;
@@ -115,14 +119,6 @@ public class CartActivity extends AppCompatActivity {
 
 
 
-            }
-        });
-        selected_store = findViewById(R.id.selected_store);
-        selected_store.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CartActivity.this,StoreActivity.class);
-                startActivity(intent);
             }
         });
 

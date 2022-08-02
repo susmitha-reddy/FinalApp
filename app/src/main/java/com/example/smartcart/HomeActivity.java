@@ -87,16 +87,14 @@ public class HomeActivity extends AppCompatActivity implements FilterDialog.Filt
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.SearchActivity:
-                        if(PreferenceManager.getInstance(HomeActivity.this).getStoresList("NearbyStores")!=null){
-                            startActivity(new Intent(getApplicationContext(),SearchActivity.class));
-                            overridePendingTransition(0,0);
-                            return true;
-                        }
-                        else{
+                        if(PreferenceManager.getInstance(HomeActivity.this).getStoresList("NearbyStores")==null){
                             FilterDialog filterDialog = new FilterDialog();
                             filterDialog.show(getSupportFragmentManager(),"filter dialog");
-                            return true;
                         }
+                        startActivity(new Intent(getApplicationContext(),SearchActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
                     case R.id.CartActivity:
                         startActivity(new Intent(getApplicationContext(),CartActivity.class));
                         overridePendingTransition(0,0);

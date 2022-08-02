@@ -45,11 +45,11 @@ public class SearchActivity extends AppCompatActivity {
 
     ProgressBar progressBar;
     AutoCompleteTextView autoCompleteTextView;
-    ImageButton search_button;
+    MaterialButton search_button;
     ConstraintLayout constraintLayout1, add_layout;
     TextView add_text;
     MaterialButton add_button, cart_button;
-    Button done_button;
+    MaterialButton done_button;
 
     int counter = 0;
     ArrayList<String> inventoryProducts = new ArrayList<String>();

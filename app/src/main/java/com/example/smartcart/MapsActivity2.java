@@ -61,15 +61,13 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.SearchActivity:
-                        if(PreferenceManager.getInstance(MapsActivity2.this).getStoresList("NearbyStores")!=null){
-                            startActivity(new Intent(getApplicationContext(),SearchActivity.class));
-                            overridePendingTransition(0,0);
-                            return true;
-                        }
-                        else{
+                        if(PreferenceManager.getInstance(MapsActivity2.this).getStoresList("NearbyStores")==null){
                             FilterDialog filterDialog = new FilterDialog();
                             filterDialog.show(getSupportFragmentManager(),"filter dialog");
                         }
+                        startActivity(new Intent(getApplicationContext(),SearchActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
                     case R.id.CartActivity:
                         startActivity(new Intent(getApplicationContext(),CartActivity.class));
                         overridePendingTransition(0,0);

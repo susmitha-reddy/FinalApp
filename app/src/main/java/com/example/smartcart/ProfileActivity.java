@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.smartcart.util.PreferenceManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.button.MaterialButton;
 
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
@@ -20,7 +21,7 @@ import io.realm.mongodb.User;
 
 public class ProfileActivity extends AppCompatActivity {
     TextView name_text, name_value, email_text, email_value, phone_text, phone_value, location_text, location_value, radius_text, radius_value;
-    Button logout, edit;
+    MaterialButton logout, edit;
     String appId = "smartcartdb-unnio";
     private App app;
     @Override
@@ -39,6 +40,10 @@ public class ProfileActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.SearchActivity:
+                        if(PreferenceManager.getInstance(ProfileActivity.this).getStoresList("NearbyStores")==null){
+                            FilterDialog filterDialog = new FilterDialog();
+                            filterDialog.show(getSupportFragmentManager(),"filter dialog");
+                        }
                         startActivity(new Intent(getApplicationContext(),SearchActivity.class));
                         overridePendingTransition(0,0);
                         return true;
